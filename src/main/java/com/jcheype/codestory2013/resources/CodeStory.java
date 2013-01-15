@@ -41,4 +41,10 @@ public class CodeStory {
         response.write(build);
         return null;
     }
+
+    @Path("/shutyourfuckinggob")
+    @GET
+    public void shutyourfuckinggob(){
+        System.exit(0);
+    }
 }

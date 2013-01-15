@@ -20,8 +20,5 @@ public class App {
         logger.debug("STARTING");
         springWebServer.setPort(9999);
         springWebServer.start();
-
-        String name = ManagementFactory.getRuntimeMXBean().getName();
-        logger.debug("name: ", name);
     }
 }
