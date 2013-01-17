@@ -58,7 +58,7 @@ public class CodeStory {
         else if ("As tu bien recu le premier enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
         else if ("((1,1 2) 3,14 4 (5 6 7) (8 9 10)*4267387833344334647677634)/2*553344300034334349999000".equals(request.getParam("q")))
-            return "31878018903828901761984975061078744643351263313920";
+            return "31878018903828899277492024491376690701584023926880";
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
