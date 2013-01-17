@@ -33,6 +33,8 @@ public class CodeStory {
             return "cheype@gmail.com";
         else if("Es tu heureux de participer(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
+        else if("Es tu abonne a la mailing list(OUI/NON)".equals(request.getParam("q")))
+            return "OUI";
 
 
         HttpResponse build = new ResponseBuilder()
