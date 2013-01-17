@@ -62,7 +62,8 @@ public class CodeStory {
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
         if(calc != null){
-            DecimalFormat df = new DecimalFormat("######.###");
+            DecimalFormat df = new DecimalFormat();
+            df.setParseIntegerOnly(true);
             return df.format(calc);
         }
 

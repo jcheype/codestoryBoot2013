@@ -37,18 +37,30 @@ public class SimpleCalcTest {
     @Test
     public void testMore(){
         Double calc = SimpleCalc.calc("(1+2)/2");
-        DecimalFormat df = new DecimalFormat("###.###");
+        DecimalFormat df = new DecimalFormat();
 
+        df.setParseIntegerOnly(true);
         System.out.println(df.format(calc));
+
         assertThat(calc).isEqualTo((1.0+2)/2);
     }
 
     @Test
     public void testFloat(){
         Double calc = SimpleCalc.calc("1,5*4");
-        DecimalFormat df = new DecimalFormat("###.###");
+        DecimalFormat df = new DecimalFormat();
 
+        df.setParseIntegerOnly(true);
         System.out.println(df.format(calc));
+
         assertThat(calc).isEqualTo(1.5*4);
     }
+
+//    @Test
+//    public void testBig(){
+//        Double calc = SimpleCalc.calc("((1,1 2) 3,14 4 (5 6 7) (8 9 10)*4267387833344334647677634)/2*553344300034334349999000");
+//        DecimalFormat df = new DecimalFormat();
+//        df.setParseIntegerOnly(true);
+//        assertThat(calc).isEqualTo(((1.1+2)+3.14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000);
+//    }
 }
