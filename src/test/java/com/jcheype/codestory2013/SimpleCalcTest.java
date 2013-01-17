@@ -56,11 +56,12 @@ public class SimpleCalcTest {
         assertThat(calc).isEqualTo(1.5*4);
     }
 
-//    @Test
-//    public void testBig(){
-//        Double calc = SimpleCalc.calc("((1,1 2) 3,14 4 (5 6 7) (8 9 10)*4267387833344334647677634)/2*553344300034334349999000");
-//        DecimalFormat df = new DecimalFormat();
-//        df.setParseIntegerOnly(true);
-//        assertThat(calc).isEqualTo(((1.1+2)+3.14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000);
-//    }
+    @Test
+    public void testBig(){
+        Double calc = SimpleCalc.calc("((1,1 2) 3,14 4 (5 6 7) (8 9 10)*4267387833344334647677634)/2*553344300034334349999000");
+        DecimalFormat df = new DecimalFormat();
+        df.setParseIntegerOnly(true);
+        df.setMaximumIntegerDigits(50);
+        System.out.println(df.format(calc));
+    }
 }

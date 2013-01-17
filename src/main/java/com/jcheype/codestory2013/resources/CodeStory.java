@@ -60,12 +60,10 @@ public class CodeStory {
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
-            if (calc < 10000000) {
-                DecimalFormat df = new DecimalFormat();
-                df.setParseIntegerOnly(true);
-                return df.format(calc);
-            }
-            return calc.toString();
+            DecimalFormat df = new DecimalFormat();
+            df.setParseIntegerOnly(true);
+            df.setMaximumIntegerDigits(50);
+            return df.format(calc);
         }
 
         HttpResponse build = new ResponseBuilder()
