@@ -10,7 +10,7 @@ package com.jcheype.codestory2013.enonce1;
 public enum Piece {
     FOO(1),
     BAR(7),
-    QUIX(11),
+    QIX(11),
     BAZ(21);
 
     private final int value;

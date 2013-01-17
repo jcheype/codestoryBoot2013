@@ -13,14 +13,14 @@ import java.util.Map;
 public class FooBar {
     public int foo = 0;
     public int bar = 0;
-    public int quix = 0;
+    public int qix = 0;
     public int baz = 0;
 
     public FooBar copy(){
         FooBar fooBar = new FooBar();
         fooBar.foo = foo;
         fooBar.bar = bar;
-        fooBar.quix = quix;
+        fooBar.qix = qix;
         fooBar.baz = baz;
         return fooBar;
     }
@@ -31,7 +31,7 @@ public class FooBar {
                 break;
             case BAR: bar++;
                 break;
-            case QUIX: quix++;
+            case QIX: qix++;
                 break;
             case BAZ: baz++;
                 break;
@@ -49,7 +49,7 @@ public class FooBar {
         if (bar != fooBar.bar) return false;
         if (baz != fooBar.baz) return false;
         if (foo != fooBar.foo) return false;
-        if (quix != fooBar.quix) return false;
+        if (qix != fooBar.qix) return false;
 
         return true;
     }
@@ -58,7 +58,7 @@ public class FooBar {
     public int hashCode() {
         int result = foo;
         result = 31 * result + bar;
-        result = 31 * result + quix;
+        result = 31 * result + qix;
         result = 31 * result + baz;
         return result;
     }
@@ -68,7 +68,7 @@ public class FooBar {
         return "FooBar{" +
                 "foo=" + foo +
                 ", bar=" + bar +
-                ", quix=" + quix +
+                ", qix=" + qix +
                 ", baz=" + baz +
                 '}';
     }
@@ -79,8 +79,8 @@ public class FooBar {
             map.put("foo", foo);
         if(bar>0)
             map.put("bar", bar);
-        if(quix>0)
-            map.put("quix", quix);
+        if(qix >0)
+            map.put("qix", qix);
         if(baz>0)
             map.put("baz", baz);
 

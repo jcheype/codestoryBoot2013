@@ -24,4 +24,11 @@ public class Enonce1Test {
         assertThat(decompose).hasSize(2);
     }
 
+    @Test
+    public void enonce1Test11(){
+        Collection decompose = enonce1.decompose(11);
+        System.out.println(decompose);
+        assertThat(decompose).hasSize(3);
+    }
+
 }
