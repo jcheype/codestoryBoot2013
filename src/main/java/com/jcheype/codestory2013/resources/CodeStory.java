@@ -54,7 +54,8 @@ public class CodeStory {
             return "NON";
         else if ("As tu bien recu le premier enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
-
+        else if ("1 1".equals(request.getParam("q")))
+            return "2";
 
         HttpResponse build = new ResponseBuilder()
                 .setStatus(HttpResponseStatus.NO_CONTENT)
