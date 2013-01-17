@@ -95,7 +95,7 @@ public class CodeStory {
         response.write(httpResponse);
     }
 
-    @Path("/enonce1/:id")
+    @Path("/enonce/:id")
     @POST
     public void getPost(String id, Request request, Response response) throws IOException {
         String content = request.content;

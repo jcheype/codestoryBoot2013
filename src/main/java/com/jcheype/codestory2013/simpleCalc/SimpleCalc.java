@@ -30,7 +30,8 @@ public class SimpleCalc {
             s = s.replaceAll(",", ".");
             return ((Double) engine.eval(s));
         } catch (ScriptException e) {
-            logger.warn("cannot run" ,e);
+            logger.warn("cannot run");
+            logger.trace("cannot run", e);
         }
         return null;
     }
