@@ -41,8 +41,6 @@ public class CodeStory {
     Logger logger = LoggerFactory.getLogger(CodeStory.class);
 
 
-
-
     @Path("/")
     @GET
     public String getQuery(Request request, Response response) {
@@ -61,10 +59,13 @@ public class CodeStory {
             return "OUI";
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
-        if(calc != null){
-            DecimalFormat df = new DecimalFormat();
-            df.setParseIntegerOnly(true);
-            return df.format(calc);
+        if (calc != null) {
+            if (calc < 10000000) {
+                DecimalFormat df = new DecimalFormat();
+                df.setParseIntegerOnly(true);
+                return df.format(calc);
+            }
+            return calc.toString();
         }
 
         HttpResponse build = new ResponseBuilder()
