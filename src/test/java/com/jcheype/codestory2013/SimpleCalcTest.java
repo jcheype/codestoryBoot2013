@@ -3,6 +3,8 @@ package com.jcheype.codestory2013;
 import com.jcheype.codestory2013.simpleCalc.SimpleCalc;
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
@@ -35,7 +37,9 @@ public class SimpleCalcTest {
     @Test
     public void testMore(){
         Double calc = SimpleCalc.calc("(1+2)/2");
-        System.out.println(calc);
+        DecimalFormat df = new DecimalFormat("###.###");
+
+        System.out.println(df.format(calc));
         assertThat(calc).isEqualTo((1.0+2)/2);
     }
 }

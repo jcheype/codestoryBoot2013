@@ -21,9 +21,8 @@ import javax.ws.rs.Path;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,8 +61,10 @@ public class CodeStory {
             return "OUI";
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
-        if(calc != null)
-            return calc.toString();
+        if(calc != null){
+            DecimalFormat df = new DecimalFormat("######.###");
+            return df.format(calc);
+        }
 
         HttpResponse build = new ResponseBuilder()
                 .setStatus(HttpResponseStatus.NO_CONTENT)
