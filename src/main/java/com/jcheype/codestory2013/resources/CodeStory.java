@@ -62,6 +62,7 @@ public class CodeStory {
         if (calc != null) {
             DecimalFormat df = new DecimalFormat();
             df.setParseIntegerOnly(true);
+            df.setGroupingUsed(false);
             df.setMaximumIntegerDigits(50);
             return df.format(calc);
         }

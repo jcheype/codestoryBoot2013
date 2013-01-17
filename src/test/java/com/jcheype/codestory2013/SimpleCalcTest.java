@@ -62,6 +62,8 @@ public class SimpleCalcTest {
         DecimalFormat df = new DecimalFormat();
         df.setParseIntegerOnly(true);
         df.setMaximumIntegerDigits(50);
+        df.setGroupingUsed(false);
+
         System.out.println(df.format(calc));
     }
 }
