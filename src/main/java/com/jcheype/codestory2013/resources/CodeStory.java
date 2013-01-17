@@ -52,7 +52,7 @@ public class CodeStory {
             return "OUI";
         else if ("Est ce que tu reponds toujours oui(OUI/NON)".equals(request.getParam("q")))
             return "NON";
-        else if ("As tu bien recu le premier enonce1(OUI/NON)".equals(request.getParam("q")))
+        else if ("As tu bien recu le premier enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
 
 
