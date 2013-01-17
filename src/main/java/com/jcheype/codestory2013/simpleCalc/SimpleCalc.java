@@ -1,5 +1,11 @@
 package com.jcheype.codestory2013.simpleCalc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,25 +17,45 @@ import java.util.regex.Pattern;
  * To change this template use File | Settings | File Templates.
  */
 public class SimpleCalc {
+    static Logger logger = LoggerFactory.getLogger(SimpleCalc.class);
+
     static Pattern regex = Pattern.compile("(\\d+)(.)(\\d+)");
+    static ScriptEngineManager factory = new ScriptEngineManager();
+    // create a JavaScript engine
+    static ScriptEngine engine = factory.getEngineByName("JavaScript");
 
-    public static Integer calc(String q){
-        Matcher matcher = regex.matcher(q);
-        if(matcher.find()){
-            String v1 = matcher.group(1);
-            String sign = matcher.group(2);
-            String v2 = matcher.group(3);
-
-            if(sign.equals(" "))
-                return Integer.parseInt(v1) + Integer.parseInt(v2);
-            if(sign.equals("*"))
-                return Integer.parseInt(v1) * Integer.parseInt(v2);
-            if(sign.equals("-"))
-                return Integer.parseInt(v1) - Integer.parseInt(v2);
-            if(sign.equals("/"))
-                return Integer.parseInt(v1) / Integer.parseInt(v2);
+    public static Integer calc(String q) {
+        try {
+            return ((Double) engine.eval(q.replaceAll(" +", "+"))).intValue();
+        } catch (ScriptException e) {
+            logger.warn("cannot run" ,e);
         }
-
         return null;
     }
+
+    // evaluate JavaScript code from String
+
+
+
+//    public static Integer calc(String q){
+//
+//
+//        Matcher matcher = regex.matcher(q);
+//        if(matcher.find()){
+//            String v1 = matcher.group(1);
+//            String sign = matcher.group(2);
+//            String v2 = matcher.group(3);
+//
+//            if(sign.equals(" "))
+//                return Integer.parseInt(v1) + Integer.parseInt(v2);
+//            if(sign.equals("*"))
+//                return Integer.parseInt(v1) * Integer.parseInt(v2);
+//            if(sign.equals("-"))
+//                return Integer.parseInt(v1) - Integer.parseInt(v2);
+//            if(sign.equals("/"))
+//                return Integer.parseInt(v1) / Integer.parseInt(v2);
+//        }
+//
+//        return null;
+//    }
 }
