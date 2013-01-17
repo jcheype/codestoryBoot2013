@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import java.io.File;
@@ -56,7 +57,7 @@ public class CodeStory {
     }
 
     @Path("/enonce/:id")
-    @GET
+    @POST
     public void getPost(String id, Request request, Response response) throws IOException {
         String content = request.content;
 
