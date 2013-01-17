@@ -24,9 +24,9 @@ public class SimpleCalc {
     // create a JavaScript engine
     static ScriptEngine engine = factory.getEngineByName("JavaScript");
 
-    public static Integer calc(String q) {
+    public static Double calc(String q) {
         try {
-            return ((Double) engine.eval(q.replaceAll(" +", "+"))).intValue();
+            return ((Double) engine.eval(q.replaceAll(" +", "+")));
         } catch (ScriptException e) {
             logger.warn("cannot run" ,e);
         }

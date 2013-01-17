@@ -61,7 +61,7 @@ public class CodeStory {
         else if ("As tu bien recu le premier enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
 
-        Integer calc = SimpleCalc.calc(request.getParam("q"));
+        Double calc = SimpleCalc.calc(request.getParam("q"));
         if(calc != null)
             return calc.toString();
 
