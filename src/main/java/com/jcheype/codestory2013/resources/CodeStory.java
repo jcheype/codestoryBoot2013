@@ -2,6 +2,7 @@ package com.jcheype.codestory2013.resources;
 
 import com.google.common.io.Files;
 import com.jcheype.codestory2013.enonce1.Enonce1;
+import com.jcheype.codestory2013.simpleCalc.SimpleCalc;
 import com.jcheype.webServer.Request;
 import com.jcheype.webServer.Response;
 import com.jcheype.webServer.ResponseBuilder;
@@ -21,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,6 +41,9 @@ public class CodeStory {
 
     Logger logger = LoggerFactory.getLogger(CodeStory.class);
 
+
+
+
     @Path("/")
     @GET
     public String getQuery(Request request, Response response) {
@@ -54,8 +60,10 @@ public class CodeStory {
             return "NON";
         else if ("As tu bien recu le premier enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
-        else if ("1 1".equals(request.getParam("q")))
-            return "2";
+
+        Integer calc = SimpleCalc.calc(request.getParam("q"));
+        if(calc != null)
+            return calc.toString();
 
         HttpResponse build = new ResponseBuilder()
                 .setStatus(HttpResponseStatus.NO_CONTENT)
