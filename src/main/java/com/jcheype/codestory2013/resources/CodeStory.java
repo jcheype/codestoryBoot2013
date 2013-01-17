@@ -55,13 +55,13 @@ public class CodeStory {
         return null;
     }
 
-    @Path("/")
+    @Path("/enonce/:id")
     @GET
-    public void getPost(Request request, Response response) throws IOException {
+    public void getPost(String id, Request request, Response response) throws IOException {
         String content = request.content;
 
         logger.debug("content: " + content);
-        File codestory = File.createTempFile("codestory", ".md");
+        File codestory = File.createTempFile("codestory_"+ id +"_",".md");
         logger.debug("file content: " + codestory.getPath());
         Files.write(content, codestory, Charset.forName("UTF-8"));
 
