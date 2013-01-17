@@ -60,6 +60,7 @@ public class CodeStory {
 
         logger.debug("content: " + content);
         File codestory = File.createTempFile("codestory", ".md");
+        logger.debug("file content: " + codestory.getPath());
         Files.write(content, codestory, Charset.forName("UTF-8"));
 
 
