@@ -31,6 +31,8 @@ public class CodeStory {
         logger.debug("request: " + request.getParam("q"));
         if("Quelle est ton adresse email".equals(request.getParam("q")))
             return "cheype@gmail.com";
+        else if("Es tu heureux de participer(OUI/NON)".equals("q"))
+            return "OUI";
 
 
         HttpResponse build = new ResponseBuilder()
