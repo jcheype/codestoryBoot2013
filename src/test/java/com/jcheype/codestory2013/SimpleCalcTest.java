@@ -42,4 +42,13 @@ public class SimpleCalcTest {
         System.out.println(df.format(calc));
         assertThat(calc).isEqualTo((1.0+2)/2);
     }
+
+    @Test
+    public void testFloat(){
+        Double calc = SimpleCalc.calc("1,5*4");
+        DecimalFormat df = new DecimalFormat("###.###");
+
+        System.out.println(df.format(calc));
+        assertThat(calc).isEqualTo(1.5*4);
+    }
 }

@@ -26,7 +26,9 @@ public class SimpleCalc {
 
     public static Double calc(String q) {
         try {
-            return ((Double) engine.eval(q.replaceAll(" +", "+")));
+            String s = q.replaceAll(" +", "+");
+            s = s.replaceAll(",", ".");
+            return ((Double) engine.eval(s));
         } catch (ScriptException e) {
             logger.warn("cannot run" ,e);
         }
