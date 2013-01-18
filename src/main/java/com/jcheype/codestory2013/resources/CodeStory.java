@@ -132,11 +132,12 @@ public class CodeStory {
         logger.debug("vols: {}", vols);
 
         List<Vol> optimize = optimizer.optimize(Collections.EMPTY_LIST, vols);
-        Map format = optimizer.format(optimize);
+//        Map format = optimizer.format(optimize);
 
 
 
-        String data = mapper.writeValueAsString(format);
+//        String data = mapper.writeValueAsString(format);
+        String data = optimizer.formatString(optimize);
         logger.debug("result: {}", data);
 
         HttpResponse httpResponse = new ResponseBuilder().setVersion(HttpVersion.HTTP_1_0).setStatus(HttpResponseStatus.valueOf(201))

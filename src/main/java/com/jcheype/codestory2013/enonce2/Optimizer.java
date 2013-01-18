@@ -1,5 +1,6 @@
 package com.jcheype.codestory2013.enonce2;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,22 @@ public class Optimizer {
         HashMap result = new HashMap();
         result.put("gain", price);
         result.put("path", path);
+        return result;
+    }
+    public String formatString(List<Vol> vols){
+        String template = "{\n" +
+                "    \"gain\" : %d,\n" +
+                "    \"path\" : %s\n" +
+                "}";
+
+        int price = price(vols);
+        LinkedList<String> path = new LinkedList<String>();
+        for(Vol vol : vols){
+            path.add("\""+vol.getVol()+"\"");
+        }
+
+        String result = String.format(template, price, path);
+
         return result;
     }
 
