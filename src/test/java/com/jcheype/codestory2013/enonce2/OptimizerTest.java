@@ -45,7 +45,7 @@ public class OptimizerTest {
     @Test
     public void optimizeRand() throws IOException {
         Optimizer optimizer = new Optimizer();
-        List<Vol> list = randList(50);
+        List<Vol> list = randList(40);
         Collections.sort(list, new VolComparator());
 
         long start = System.currentTimeMillis();

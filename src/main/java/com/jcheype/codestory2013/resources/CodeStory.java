@@ -4,6 +4,7 @@ import com.google.common.io.Files;
 import com.jcheype.codestory2013.enonce1.Enonce1;
 import com.jcheype.codestory2013.enonce2.Optimizer;
 import com.jcheype.codestory2013.enonce2.Vol;
+import com.jcheype.codestory2013.enonce2.VolComparator;
 import com.jcheype.codestory2013.simpleCalc.SimpleCalc;
 import com.jcheype.webServer.Request;
 import com.jcheype.webServer.Response;
@@ -129,15 +130,11 @@ public class CodeStory {
         });
         Optimizer optimizer = new Optimizer();
         List<Vol> vols = Vol.fromMaps(maps);
-
+        Collections.sort(vols, new VolComparator());
         logger.debug("vols: {}", vols);
 
         List<Vol> optimize = optimizer.optimize3(null, vols);
-//        Map format = optimizer.format(optimize);
 
-
-
-//        String data = mapper.writeValueAsString(format);
         String data = optimizer.formatString(optimize);
         logger.debug("result: {}", data);
 
