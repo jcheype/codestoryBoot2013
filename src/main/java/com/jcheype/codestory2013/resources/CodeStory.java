@@ -67,6 +67,8 @@ public class CodeStory {
             return "31878018903828899277492024491376690701584023926880";
         else if ("As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)".equals(request.getParam("q")))
             return "QUELS_BUGS";
+        else if ("As tu bien recu le second enonce(OUI/NON)".equals(request.getParam("q")))
+            return "OUI";
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
