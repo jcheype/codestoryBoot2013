@@ -17,8 +17,12 @@ public class Vol {
     private int duree;
     private int prix;
 
-    public boolean isNext(Vol vol){
-        return vol.getDepart() >= getDepart()+getDuree();
+    public boolean isNext(Vol vol) {
+        return vol.getDepart() >= getEnd();
+    }
+
+    public int getEnd() {
+        return getDepart() + getDuree();
     }
 
     public String getVol() {
@@ -87,9 +91,9 @@ public class Vol {
                 '}';
     }
 
-    public static List<Vol> fromMaps(List<Map> volsMap){
+    public static List<Vol> fromMaps(List<Map> volsMap) {
         ArrayList<Vol> vols = new ArrayList<Vol>();
-        for(Map map : volsMap){
+        for (Map map : volsMap) {
             Vol vol = new Vol();
             vol.setDepart((Integer) map.get("DEPART"));
             vol.setDuree((Integer) map.get("DUREE"));
@@ -98,5 +102,16 @@ public class Vol {
             vols.add(vol);
         }
         return vols;
+    }
+
+    public static String toString(List<Vol> vols) {
+
+        StringBuilder sb = new StringBuilder();
+        for (Vol vol : vols) {
+            sb.append(vol.getDepart()).append("->").append(vol.getEnd()).append(" ");
+        }
+
+        return sb.toString();
+
     }
 }

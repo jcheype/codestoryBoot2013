@@ -133,7 +133,7 @@ public class CodeStory {
         Collections.sort(vols, new VolComparator());
         logger.debug("vols: {}", vols);
 
-        List<Vol> optimize = optimizer.optimize3(null, vols);
+        List<Vol> optimize = optimizer.optimize4(vols);
 
         String data = optimizer.formatString(optimize);
         logger.debug("result: {}", data);

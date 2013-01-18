@@ -10,11 +10,19 @@ import java.util.Comparator;
  * To change this template use File | Settings | File Templates.
  */
 public class VolComparator implements Comparator<Vol> {
+    private final int way;
+    public VolComparator() {
+        this(1);
+    }
+
+    public VolComparator(int i) {
+        way = i;
+    }
 
     @Override
     public int compare(Vol v1, Vol v2) {
-        if (v1.getDepart()>v2.getDepart()) return 1;
-        else if((v1.getDepart()<v2.getDepart())) return -1;
+        if (v1.getDepart()>v2.getDepart()) return 1*way;
+        else if((v1.getDepart()<v2.getDepart())) return -1*way;
         else return 0;
     }
 }
