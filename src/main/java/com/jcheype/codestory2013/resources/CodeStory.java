@@ -70,6 +70,7 @@ public class CodeStory {
         else if ("As tu bien recu le second enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
 
+
         Double calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
             DecimalFormat df = new DecimalFormat();
@@ -126,11 +127,20 @@ public class CodeStory {
         List<Map> maps = mapper.readValue(content, new TypeReference<List<Map>>() {
         });
         Optimizer optimizer = new Optimizer();
-        List<Vol> optimize = optimizer.optimize(Collections.EMPTY_LIST, Vol.fromMaps(maps));
+        List<Vol> vols = Vol.fromMaps(maps);
+
+        logger.debug("vols: {}", vols);
+
+        List<Vol> optimize = optimizer.optimize(Collections.EMPTY_LIST, vols);
         Map format = optimizer.format(optimize);
 
+
+
+        String data = mapper.writeValueAsString(format);
+        logger.debug("result: {}", data);
+
         HttpResponse httpResponse = new ResponseBuilder().setStatus(HttpResponseStatus.valueOf(200))
-                .setContent(mapper.writeValueAsString(format).toUpperCase(), Charset.forName("UTF-8"))
+                .setContent(data, Charset.forName("UTF-8"))
                 .setHeader("Content-type", "application/json; charset=UTF-8")
                 .build();
         response.write(httpResponse);
