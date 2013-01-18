@@ -139,7 +139,7 @@ public class CodeStory {
         String data = mapper.writeValueAsString(format);
         logger.debug("result: {}", data);
 
-        HttpResponse httpResponse = new ResponseBuilder().setStatus(HttpResponseStatus.valueOf(201))
+        HttpResponse httpResponse = new ResponseBuilder().setVersion(HttpVersion.HTTP_1_0).setStatus(HttpResponseStatus.valueOf(201))
                 .setContent(data, Charset.forName("UTF-8"))
                 .setHeader("Content-type", "application/json; charset=UTF-8")
                 .build();
