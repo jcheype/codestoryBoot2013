@@ -49,12 +49,12 @@ public class OptimizerTest {
         Collections.sort(list, new VolComparator());
 
         long start = System.currentTimeMillis();
-        List<Vol> optimize = optimizer.optimize2(null, list);
+        List<Vol> optimize = optimizer.optimize3(null, list);
         System.out.println(optimizer.formatString(optimize));
         System.out.println(System.currentTimeMillis() - start);
 
         start = System.currentTimeMillis();
-        optimize = optimizer.optimize(Collections.EMPTY_LIST, list);
+        optimize = optimizer.optimize4(null, list);
         System.out.println(optimizer.formatString(optimize));
         System.out.println(System.currentTimeMillis() - start);
 

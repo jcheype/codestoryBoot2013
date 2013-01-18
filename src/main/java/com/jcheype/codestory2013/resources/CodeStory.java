@@ -132,7 +132,7 @@ public class CodeStory {
 
         logger.debug("vols: {}", vols);
 
-        List<Vol> optimize = optimizer.optimize2(null, vols);
+        List<Vol> optimize = optimizer.optimize3(null, vols);
 //        Map format = optimizer.format(optimize);
 
 
