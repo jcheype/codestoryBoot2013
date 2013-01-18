@@ -2,11 +2,14 @@ package com.jcheype.codestory2013.resources;
 
 import com.google.common.io.Files;
 import com.jcheype.codestory2013.enonce1.Enonce1;
+import com.jcheype.codestory2013.enonce2.Optimizer;
+import com.jcheype.codestory2013.enonce2.Vol;
 import com.jcheype.codestory2013.simpleCalc.SimpleCalc;
 import com.jcheype.webServer.Request;
 import com.jcheype.webServer.Response;
 import com.jcheype.webServer.ResponseBuilder;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
@@ -23,6 +26,9 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -106,6 +112,26 @@ public class CodeStory {
         Files.write(content, codestory, Charset.forName("UTF-8"));
 
         response.write(new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.valueOf(201)));
+    }
+
+    @Path("/jajascript/optimize")
+    @POST
+    public void enonce2Post(Request request, Response response) throws IOException {
+        String content = request.content;
+
+        logger.debug("content: " + content);
+
+        List<Map> maps = mapper.readValue(content, new TypeReference<List<Map>>() {
+        });
+        Optimizer optimizer = new Optimizer();
+        List<Vol> optimize = optimizer.optimize(Collections.EMPTY_LIST, Vol.fromMaps(maps));
+        Map format = optimizer.format(optimize);
+
+        HttpResponse httpResponse = new ResponseBuilder().setStatus(HttpResponseStatus.valueOf(200))
+                .setContent(mapper.writeValueAsString(format).toUpperCase(), Charset.forName("UTF-8"))
+                .setHeader("Content-type", "application/json; charset=UTF-8")
+                .build();
+        response.write(httpResponse);
     }
 
     @Path("/shutyourfuckinggob")
