@@ -38,23 +38,24 @@ public class OptimizerTest {
         List<Map> maps = mapper.readValue(json, new TypeReference<List<Map>>() {
         });
         Optimizer optimizer = new Optimizer();
-        List<Vol> optimize = optimizer.optimize2(null, Vol.fromMaps(maps));
+        List<Vol> optimize = optimizer.optimize3(null, Vol.fromMaps(maps));
         System.out.println(optimizer.formatString(optimize));
     }
 
     @Test
     public void optimizeRand() throws IOException {
         Optimizer optimizer = new Optimizer();
-        List<Vol> list = randList(40);
+        List<Vol> list = randList(50);
         Collections.sort(list, new VolComparator());
-
-        long start = System.currentTimeMillis();
-        List<Vol> optimize = optimizer.optimize3(null, list);
-        System.out.println(optimizer.formatString(optimize));
-        System.out.println(System.currentTimeMillis() - start);
+        long start;
+        List<Vol> optimize;
+//        start = System.currentTimeMillis();
+//         optimize = optimizer.optimize2(null, list);
+//        System.out.println(optimizer.formatString(optimize));
+//        System.out.println(System.currentTimeMillis() - start);
 
         start = System.currentTimeMillis();
-        optimize = optimizer.optimize4(null, list);
+        optimize = optimizer.optimize3(null, list);
         System.out.println(optimizer.formatString(optimize));
         System.out.println(System.currentTimeMillis() - start);
 

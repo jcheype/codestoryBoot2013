@@ -17,60 +17,60 @@ import java.util.*;
 public class Optimizer {
     Logger logger = LoggerFactory.getLogger(Optimizer.class);
 
-    public List<Vol> optimize(List<Vol> path, List<Vol> vols){
-//       logger.debug("pathOptimized: {}", path);
+//    public List<Vol> optimize(List<Vol> path, List<Vol> vols){
+////       logger.debug("pathOptimized: {}", path);
+//
+//        Vol last=null;
+//        if(!path.isEmpty())
+//            last = Iterables.getLast(path);
+//
+//        List<Vol> pathOptimized = path;
+//        int price = price(path);
+//
+//        for(Vol vol: vols){
+//            if(last!= null && vol.isNext(last))
+//                continue;
+//            if((last == null || last.isNext(vol) )){
+//                List<Vol> volsCopy = new ArrayList<Vol>(vols);
+//                LinkedList<Vol> pathCopy = new LinkedList<Vol>(path);
+//                volsCopy.remove(vol);
+//                pathCopy.add(vol);
+//                List<Vol> tmpPath = optimize(pathCopy, volsCopy);
+//                int tmpPrice = price(tmpPath);
+//                if(tmpPrice>price){
+//                    pathOptimized = tmpPath;
+//                    price = tmpPrice;
+//                }
+//            }
+//        }
+//
+//        return pathOptimized;
+//    }
 
-        Vol last=null;
-        if(!path.isEmpty())
-            last = Iterables.getLast(path);
-
-        List<Vol> pathOptimized = path;
-        int price = price(path);
-
-        for(Vol vol: vols){
-            if(last!= null && vol.isNext(last))
-                continue;
-            if((last == null || last.isNext(vol) )){
-                List<Vol> volsCopy = new ArrayList<Vol>(vols);
-                LinkedList<Vol> pathCopy = new LinkedList<Vol>(path);
-                volsCopy.remove(vol);
-                pathCopy.add(vol);
-                List<Vol> tmpPath = optimize(pathCopy, volsCopy);
-                int tmpPrice = price(tmpPath);
-                if(tmpPrice>price){
-                    pathOptimized = tmpPath;
-                    price = tmpPrice;
-                }
-            }
-        }
-
-        return pathOptimized;
-    }
-
-    public List<Vol> optimize2(Vol last, List<Vol> vols){
-        List<Vol> pathOptimized = null;
-        int price = 0;
-
-        for(Vol vol: vols.toArray(new Vol[]{})){
-            if((last == null || last.isNext(vol) )){
-                vols.remove(vol);
-                List<Vol> tmpPath = optimize2(vol, vols);
-                int tmpPrice = price(tmpPath);
-                if(tmpPrice>price){
-                    pathOptimized = tmpPath;
-                    price = tmpPrice;
-                }
-                vols.add(vol);
-            }
-        }
-
-        if(pathOptimized == null)
-            pathOptimized = new ArrayList<Vol>();
-        if(last != null)
-            pathOptimized.add(0, last);
-
-        return pathOptimized;
-    }
+//    public List<Vol> optimize2(Vol last, List<Vol> vols){
+//        List<Vol> pathOptimized = null;
+//        int price = 0;
+//
+//        for(Vol vol: vols.toArray(new Vol[]{})){
+//            if((last == null || last.isNext(vol) )){
+//                vols.remove(vol);
+//                List<Vol> tmpPath = optimize2(vol, vols);
+//                int tmpPrice = price(tmpPath);
+//                if(tmpPrice>price){
+//                    pathOptimized = tmpPath;
+//                    price = tmpPrice;
+//                }
+//                vols.add(vol);
+//            }
+//        }
+//
+//        if(pathOptimized == null)
+//            pathOptimized = new ArrayList<Vol>();
+//        if(last != null)
+//            pathOptimized.add(0, last);
+//
+//        return pathOptimized;
+//    }
 
 
     public List<Vol> optimize3(Vol last, List<Vol> vols){
@@ -81,7 +81,7 @@ public class Optimizer {
         for(Vol vol: vols.toArray(new Vol[]{})){
             if((last == null || last.isNext(vol) )  && (bestVol == null || !bestVol.isNext(vol)) ){
                 vols.remove(vol);
-                List<Vol> tmpPath = optimize2(vol, vols);
+                List<Vol> tmpPath = optimize3(vol, vols);
                 int tmpPrice = price(tmpPath);
                 if(tmpPrice>price){
                     pathOptimized = tmpPath;
@@ -100,39 +100,8 @@ public class Optimizer {
         return pathOptimized;
     }
 
-    Map<Integer, List<Vol>> cache = new HashMap();
 
-    public List<Vol> optimize4(Vol last, List<Vol> vols){
-        List<Vol> pathOptimized = null;
-        int price = 0;
 
-        Vol bestVol = null;
-        for(Vol vol: vols.toArray(new Vol[]{})){
-            if((last == null || last.isNext(vol) )  && (bestVol == null || !bestVol.isNext(vol)) ){
-                vols.remove(vol);
-                int key = vol.getDuree() + vol.getDepart();
-                List<Vol> tmpPath = cache.get(key);
-                if(tmpPath == null){
-                    tmpPath = optimize2(vol, vols);
-                    cache.put(key, new ArrayList<Vol>(tmpPath));
-                }
-                int tmpPrice = price(tmpPath);
-                if(tmpPrice>price){
-                    pathOptimized = tmpPath;
-                    price = tmpPrice;
-                    bestVol = vol;
-                }
-                vols.add(vol);
-            }
-        }
-
-        if(pathOptimized == null)
-            pathOptimized = new ArrayList<Vol>();
-        if(last != null)
-            pathOptimized.add(0, last);
-
-        return pathOptimized;
-    }
 
     private int price(List<Vol> optimize) {
         int price = 0;
