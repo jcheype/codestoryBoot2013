@@ -18,33 +18,58 @@ public class Optimizer {
     Logger logger = LoggerFactory.getLogger(Optimizer.class);
 
     public List<Vol> optimize(List<Vol> path, List<Vol> vols){
-//        logger.debug("pathOptimized: {}", path);
+//       logger.debug("pathOptimized: {}", path);
 
         Vol last=null;
         if(!path.isEmpty())
             last = Iterables.getLast(path);
 
         List<Vol> pathOptimized = path;
+        int price = price(path);
 
         for(Vol vol: vols){
-
-            if(last == null || last.isNext(vol)){
-                LinkedList<Vol> volsCopy = new LinkedList<Vol>(vols);
+            if(last!= null && vol.isNext(last))
+                continue;
+            if((last == null || last.isNext(vol) )){
+                List<Vol> volsCopy = new ArrayList<Vol>(vols);
                 LinkedList<Vol> pathCopy = new LinkedList<Vol>(path);
                 volsCopy.remove(vol);
                 pathCopy.add(vol);
-                pathOptimized =  best(pathOptimized, optimize(pathCopy, volsCopy));
+                List<Vol> tmpPath = optimize(pathCopy, volsCopy);
+                int tmpPrice = price(tmpPath);
+                if(tmpPrice>price){
+                    pathOptimized = tmpPath;
+                    price = tmpPrice;
+                }
             }
         }
 
         return pathOptimized;
     }
 
-    private List<Vol> best(List<Vol> pathOptimized, List<Vol> optimize) {
-        if(pathOptimized == null)
-            return optimize;
+    public List<Vol> optimize2(Vol last, List<Vol> vols){
+        List<Vol> pathOptimized = null;
+        int price = 0;
 
-        return price(pathOptimized)>price(optimize)?pathOptimized:optimize;
+        for(Vol vol: vols.toArray(new Vol[]{})){
+            if((last == null || last.isNext(vol) )){
+                vols.remove(vol);
+                List<Vol> tmpPath = optimize2(vol, vols);
+                int tmpPrice = price(tmpPath);
+                if(tmpPrice>price){
+                    pathOptimized = tmpPath;
+                    price = tmpPrice;
+                }
+                vols.add(vol);
+            }
+        }
+
+        if(pathOptimized == null)
+            pathOptimized = new ArrayList<Vol>();
+        if(last != null)
+            pathOptimized.add(0, last);
+
+        return pathOptimized;
     }
 
     private int price(List<Vol> optimize) {

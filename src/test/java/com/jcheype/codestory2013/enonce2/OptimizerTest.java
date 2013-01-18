@@ -7,9 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +19,7 @@ import java.util.Map;
 public class OptimizerTest {
     ObjectMapper mapper = new ObjectMapper();
     private String json;
+    private Random rand = new Random();
 
 
     @Before
@@ -39,7 +38,39 @@ public class OptimizerTest {
         List<Map> maps = mapper.readValue(json, new TypeReference<List<Map>>() {
         });
         Optimizer optimizer = new Optimizer();
-        List<Vol> optimize = optimizer.optimize(Collections.EMPTY_LIST, Vol.fromMaps(maps));
+        List<Vol> optimize = optimizer.optimize2(null, Vol.fromMaps(maps));
         System.out.println(optimizer.formatString(optimize));
+    }
+
+    @Test
+    public void optimizeRand() throws IOException {
+        Optimizer optimizer = new Optimizer();
+        List<Vol> list = randList(50);
+        Collections.sort(list, new VolComparator());
+
+        long start = System.currentTimeMillis();
+        List<Vol> optimize = optimizer.optimize2(null, list);
+        System.out.println(optimizer.formatString(optimize));
+        System.out.println(System.currentTimeMillis() - start);
+
+        start = System.currentTimeMillis();
+        optimize = optimizer.optimize(Collections.EMPTY_LIST, list);
+        System.out.println(optimizer.formatString(optimize));
+        System.out.println(System.currentTimeMillis() - start);
+
+    }
+
+    private List<Vol> randList(int size){
+        List<Vol> vols = new ArrayList<Vol>();
+        for(int i = 0; i<size; i++){
+            Vol vol = new Vol();
+            vol.setDepart(rand.nextInt(50));
+            vol.setDuree(rand.nextInt(10));
+            vol.setPrix(rand.nextInt(15));
+            vol.setVol(UUID.randomUUID().toString());
+            vols.add(vol);
+        }
+
+        return vols;
     }
 }

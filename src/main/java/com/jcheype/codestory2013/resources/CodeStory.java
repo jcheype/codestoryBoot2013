@@ -69,7 +69,8 @@ public class CodeStory {
             return "QUELS_BUGS";
         else if ("As tu bien recu le second enonce(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
-
+        else if ("As tu copie le code de ndeloof(OUI/NON/JE_SUIS_NICOLAS)".equals(request.getParam("q")))
+            return "NON";
 
         Double calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
@@ -131,7 +132,7 @@ public class CodeStory {
 
         logger.debug("vols: {}", vols);
 
-        List<Vol> optimize = optimizer.optimize(Collections.EMPTY_LIST, vols);
+        List<Vol> optimize = optimizer.optimize2(null, vols);
 //        Map format = optimizer.format(optimize);
 
 
