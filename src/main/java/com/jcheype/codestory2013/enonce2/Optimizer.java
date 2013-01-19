@@ -102,36 +102,36 @@ public class Optimizer {
     }
 
 
-    Map<Integer,Path> cache = new HashMap<Integer, Path>();
+    Map<Integer, Path> cache = new HashMap<Integer, Path>();
 
     public List<Vol> optimize4(List<Vol> vols) {
 
         Collections.sort(vols, new VolComparator(-1));
-        int maxTime = vols.get(0).getDepart();
+        Iterator<Vol> iterator = vols.iterator();
+        Vol vol = iterator.next();
+        int maxTime = vol.getDepart();
 
         Path last = null;
-        while(maxTime > -1){
-            while(!vols.isEmpty() && vols.get(0).getDepart() == maxTime){
-                Vol vol = vols.remove(0);
+        while (maxTime > -1) {
+            while (vol.getDepart() == maxTime) {
                 Path path = cache.get(vol.getEnd());
                 Path newPath;
-                if(path != null){
+                if (path != null) {
                     newPath = new Path(path);
                     newPath.add(vol);
-                }
-                else
+                } else
                     newPath = new Path(vol);
 
-                if(last == null || newPath.getGain()>last.getGain()){
+                if (last == null || newPath.getGain() > last.getGain()) {
                     last = newPath;
-                    cache.put(maxTime, last);
                 }
+                if (iterator.hasNext())
+                    vol = iterator.next();
+                else
+                    break;
             }
-            if(last != null){
-                cache.put(maxTime, last);
-            }
-//            logger.debug("max: {}", maxTime);
-//            logger.debug("cache: {}", last);
+            cache.put(maxTime, last);
+
             maxTime--;
         }
 
@@ -151,7 +151,7 @@ public class Optimizer {
     }
 
 
-    private int price(List<Vol> optimize) {
+    public static int price(List<Vol> optimize) {
         int price = 0;
         for (Vol vol : optimize) {
             price += vol.getPrix();

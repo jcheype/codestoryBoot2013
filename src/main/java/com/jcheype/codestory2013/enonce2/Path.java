@@ -27,16 +27,11 @@ public class Path{
     }
 
     public Path(Path p) {
-        this.vols = new ArrayList<Vol>(p.getVols());
+        this.vols = (ArrayList<Vol>) p.getVols().clone();
         this.gain = p.getGain();
     }
 
     public boolean add(Vol vol){
-        if(!vol.isNext(vols.get(0))){
-            logger.debug("vol: {}", vol);
-            logger.debug("vols: {}", vols.get(0));
-            return false;
-        }
         vols.add(0, vol);
         gain += vol.getPrix();
         return true;

@@ -1,6 +1,7 @@
 package com.jcheype.codestory2013.enonce2;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class Vol {
     }
 
     public static List<Vol> fromMaps(List<Map> volsMap) {
-        ArrayList<Vol> vols = new ArrayList<Vol>();
+        LinkedList<Vol> vols = new LinkedList<Vol>();
         for (Map map : volsMap) {
             Vol vol = new Vol();
             vol.setDepart((Integer) map.get("DEPART"));
