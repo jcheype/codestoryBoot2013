@@ -6,6 +6,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -77,6 +78,12 @@ public class OptimizerTest {
                 vol = next;
             }
         }
+    }
+
+    @Test
+    public void genFile() throws IOException {
+        List<Vol> list = randList(100000);
+        mapper.writeValue(new File("tmp.json"), list);
     }
 
     private List<Vol> randList(int size) {
