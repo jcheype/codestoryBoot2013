@@ -51,23 +51,23 @@ public class OptimizerTest {
         long start;
         List<Vol> optimize;
 
-        for (int i = 0; i < 1000; i++) {
-            List<Vol> list = randList(30);
+        for (int i = 0; i < 1; i++) {
+            List<Vol> list = randList(100000);
 
             start = System.currentTimeMillis();
-            optimize = optimizer.optimize3(null, list);
+//            optimize = optimizer.optimize3(null, list);
 //            System.out.println(optimizer.formatString(optimize));
 //            System.out.println(System.currentTimeMillis() - start);
 //            System.out.println(Vol.toString(optimize));
 
             start = System.currentTimeMillis();
             List<Vol> optimize2 = optimizer.optimize4(list);
-//            long duration = System.currentTimeMillis() - start;
-//            System.out.println(optimizer.formatString(optimize2));
-//            System.out.println(duration);
+            long duration = System.currentTimeMillis() - start;
+            System.out.println(optimizer.formatString(optimize2));
+            System.out.println(duration);
 //            System.out.println(Vol.toString(optimize2));
 
-            assertThat(Optimizer.price(optimize)).isLessThanOrEqualTo(Optimizer.price(optimize2));
+//            assertThat(Optimizer.price(optimize)).isLessThanOrEqualTo(Optimizer.price(optimize2));
             Iterator<Vol> iterator = optimize2.iterator();
 
             Vol vol = iterator.next();
@@ -83,9 +83,9 @@ public class OptimizerTest {
         List<Vol> vols = new LinkedList<Vol>();
         for (int i = 0; i < size; i++) {
             Vol vol = new Vol();
-            vol.setDepart(rand.nextInt(50));
-            vol.setDuree(rand.nextInt(10) + 1);
-            vol.setPrix(rand.nextInt(15));
+            vol.setDepart(rand.nextInt(50000));
+            vol.setDuree(rand.nextInt(100) + 1);
+            vol.setPrix(rand.nextInt(15000));
             vol.setVol(UUID.randomUUID().toString());
             vols.add(vol);
         }
