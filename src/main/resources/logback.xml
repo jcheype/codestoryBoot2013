@@ -18,6 +18,9 @@
     </appender>
 
 
+    <logger name="com.jcheype.webServer" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
     <root level="INFO">
         <appender-ref ref="log-file"/>
         <appender-ref ref="STDOUT"/>
