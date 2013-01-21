@@ -82,7 +82,7 @@ public class OptimizerTest {
 
     @Test
     public void genFile() throws IOException {
-        List<Vol> list = randList(100000);
+        List<Vol> list = randList(10000);
         mapper.writeValue(new File("tmp.json"), list);
     }
 
