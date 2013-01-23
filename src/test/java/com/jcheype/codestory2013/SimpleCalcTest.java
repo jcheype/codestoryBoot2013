@@ -18,25 +18,25 @@ public class SimpleCalcTest {
 
     @Test
     public void test12_plus_13(){
-        Double calc = SimpleCalc.calc("12 13");
+        Number calc = SimpleCalc.calc("12 13");
         assertThat(calc).isEqualTo(25);
     }
 
     @Test
     public void test12_minus_13(){
-        Double calc = SimpleCalc.calc("12-13");
+        Number calc = SimpleCalc.calc("12-13");
         assertThat(calc).isEqualTo(-1);
     }
 
     @Test
     public void test12_multiply_13(){
-        Double calc = SimpleCalc.calc("12*13");
+        Number calc = SimpleCalc.calc("12*13");
         assertThat(calc).isEqualTo(12*13);
     }
 
     @Test
     public void testMore(){
-        Double calc = SimpleCalc.calc("(1+2)/2");
+        Number calc = SimpleCalc.calc("(1+2)/2");
         DecimalFormat df = new DecimalFormat();
 
         df.setParseIntegerOnly(true);
@@ -47,7 +47,7 @@ public class SimpleCalcTest {
 
     @Test
     public void testFloat(){
-        Double calc = SimpleCalc.calc("1,5*4");
+        Number calc = SimpleCalc.calc("1,5*4");
         DecimalFormat df = new DecimalFormat();
 
         df.setParseIntegerOnly(true);
@@ -58,7 +58,7 @@ public class SimpleCalcTest {
 
     @Test
     public void testBig(){
-        Double calc = SimpleCalc.calc("((1,1 2) 3,14 4 (5 6 7) (8 9 10)*4267387833344334647677634)/2*553344300034334349999000");
+        Number calc = SimpleCalc.calc("((1,1 2) 3,14 4 (5 6 7) (8 9 10)*4267387833344334647677634)/2*553344300034334349999000");
         DecimalFormat df = new DecimalFormat();
         df.setParseIntegerOnly(true);
         df.setMaximumIntegerDigits(50);
