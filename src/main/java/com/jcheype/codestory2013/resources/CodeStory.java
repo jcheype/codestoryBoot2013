@@ -76,12 +76,12 @@ public class CodeStory {
         else if ("As tu copie le code de ndeloof(OUI/NON/JE_SUIS_NICOLAS)".equals(request.getParam("q")))
             return "NON";
 
-        Double calc = SimpleCalc.calc(request.getParam("q"));
+        Number calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
             DecimalFormat df = new DecimalFormat();
             df.setParseIntegerOnly(true);
             df.setGroupingUsed(false);
-            df.setMaximumIntegerDigits(50);
+            df.setMaximumIntegerDigits(200);
             return df.format(calc);
         }
 

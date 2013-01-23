@@ -16,6 +16,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+        <dependency>
             <groupId>com.jcheype</groupId>
             <artifactId>web-server-core</artifactId>
             <version>1.0-SNAPSHOT</version>

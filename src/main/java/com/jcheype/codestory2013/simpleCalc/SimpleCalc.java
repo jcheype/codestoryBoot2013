@@ -22,13 +22,12 @@ public class SimpleCalc {
     static Pattern regex = Pattern.compile("(\\d+)(.)(\\d+)");
     static ScriptEngineManager factory = new ScriptEngineManager();
     // create a JavaScript engine
-    static ScriptEngine engine = factory.getEngineByName("JavaScript");
-
-    public static Double calc(String q) {
+    static ScriptEngine engine = factory.getEngineByName("groovy");
+    public static Number calc(String q) {
         try {
-            String s = q.replaceAll(" +", "+");
+            String s = q.replaceAll(" +", "+").replaceAll("[a-zA-Z]", "");
             s = s.replaceAll(",", ".");
-            return ((Double) engine.eval(s));
+            return ((Number) engine.eval(s));
         } catch (ScriptException e) {
             logger.warn("cannot run");
             logger.trace("cannot run", e);
