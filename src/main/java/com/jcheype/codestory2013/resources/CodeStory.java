@@ -58,7 +58,8 @@ public class CodeStory {
             return "OUI";
         else if ("Es tu abonne a la mailing list(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
-        else if ("Es tu pret a recevoir une enonce1 au format markdown par http post(OUI/NON)".equals(request.getParam("q")))
+
+        else if ("Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)".equals(request.getParam("q")))
             return "OUI";
         else if ("Est ce que tu reponds toujours oui(OUI/NON)".equals(request.getParam("q")))
             return "NON";
