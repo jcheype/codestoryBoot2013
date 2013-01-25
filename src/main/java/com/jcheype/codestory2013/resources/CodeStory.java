@@ -75,6 +75,8 @@ public class CodeStory {
             return "OUI";
         else if ("As tu copie le code de ndeloof(OUI/NON/JE_SUIS_NICOLAS)".equals(request.getParam("q")))
             return "NON";
+        else if ("Souhaites-tu-participer-a-la-suite-de-Code-Story(OUI/NON)".equals(request.getParam("q")))
+            return "OUI";
 
         Number calc = SimpleCalc.calc(request.getParam("q"));
         if (calc != null) {
